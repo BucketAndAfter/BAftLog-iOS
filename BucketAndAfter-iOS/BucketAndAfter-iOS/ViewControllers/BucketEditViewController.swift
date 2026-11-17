@@ -25,11 +25,16 @@ final class BucketEditViewController : UIViewController {
         view.addSubview(submitButton)
         
         titleTextField.snp.makeConstraints {
-            $0.top.trailing.leading.equalTo(view.safeAreaLayoutGuide).inset(16)
+            $0.top.equalTo(view.safeAreaLayoutGuide).inset(16)
+            $0.leading.trailing.equalToSuperview()
         }
         moreTextField.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview().inset(16)
+            $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(titleTextField.snp.bottom).offset(16)
+        }
+        submitButton.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(16)
+            $0.top.equalTo(moreTextField.snp.bottom).offset(16)
         }
     }
 }
