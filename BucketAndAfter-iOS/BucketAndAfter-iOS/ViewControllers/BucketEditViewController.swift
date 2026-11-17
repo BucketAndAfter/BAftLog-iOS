@@ -14,6 +14,7 @@ final class BucketEditViewController : UIViewController {
     let titleTextField : TitleInputView = TitleInputView()
     let moreTextField : LongInputView = LongInputView(placeholderT: "여기에 세부사항을 입력하세요.")
     let submitButton : ButtonView = ButtonView(text: "확인")
+    var i = 0
     
     override func viewDidLoad() {
         view.backgroundColor = .white
@@ -36,5 +37,10 @@ final class BucketEditViewController : UIViewController {
             $0.trailing.equalToSuperview().inset(16)
             $0.top.equalTo(moreTextField.snp.bottom).offset(16)
         }
+    }
+    func setupText(title : String, more : String, i : Int) {
+        self.titleTextField.textField.text = title
+        self.moreTextField.textField.text = more
+        self.i = i
     }
 }
