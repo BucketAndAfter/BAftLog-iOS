@@ -97,7 +97,9 @@ final class BucketMoreViewConteroller : UIViewController {
             writeVC.setupTexts(i: self.i)
         }
         editButton.buttonTapped = {
-            self.navigationController?.pushViewController(BucketEditViewController(), animated: true)
+            let editVC = BucketEditViewController()
+            self.navigationController?.pushViewController(editVC, animated: true)
+            editVC.setupText(title: self.nameT.text!, more: self.moreT.text!, i: self.i)
         }
         deleteButton.buttonTapped = {
             let item = self.bucketInfo[self.i]
