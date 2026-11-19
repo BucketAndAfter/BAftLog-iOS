@@ -48,7 +48,6 @@ final class WriteThoughtViewController : UIViewController {
         }
     }
     private func setupLayout() {
-        view.addSubview(navBar)
         
         view.addSubview(scrollView)
         
@@ -56,11 +55,8 @@ final class WriteThoughtViewController : UIViewController {
             scrollView.addSubview($0)
         }
         
-        navBar.snp.makeConstraints {
-            $0.top.leading.trailing.equalToSuperview()
-        }
         scrollView.snp.makeConstraints {
-            $0.top.equalTo(navBar.snp.bottom)
+            $0.top.equalToSuperview()
             $0.leading.trailing.bottom.equalToSuperview()
         }
         nameT.snp.makeConstraints {
@@ -83,8 +79,8 @@ final class WriteThoughtViewController : UIViewController {
     func setupTexts(i : Int) {
         self.i = i
         do {
-            let descritor = FetchDescriptor<BucketInfo>()
-            bucketInfo = try context.fetch(descritor)
+            let descriptor = FetchDescriptor<BucketInfo>()
+            bucketInfo = try context.fetch(descriptor)
             let data = bucketInfo[i]
             nameT.text = data.name
             moreT.text = data.moreInfo
