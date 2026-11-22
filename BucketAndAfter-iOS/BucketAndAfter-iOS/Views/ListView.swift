@@ -24,14 +24,19 @@ final class ListView : UIView {
     let title = UILabel().then {
         $0.font = .systemFont(ofSize: 16, weight: .regular)
     }
+    let dateLabel = UILabel().then {
+        $0.font = .systemFont(ofSize: 16, weight: .regular)
+        $0.textColor = UIColor(named: "gray600")
+    }
     
     var changeView : ((Int)->Void)?
     
-    init(numberI : Int, titleT : String, isDone : Bool) {
+    init(numberI : Int, titleT : String, isDone : Bool, date : String) {
         super.init(frame: .zero)
         
         number.text = "\(numberI)"
         numberInt = numberI
+        dateLabel.text = date
         title.textColor = isDone ? UIColor(named: "gray600") : .black
         
         if isDone {
@@ -52,6 +57,7 @@ final class ListView : UIView {
         
         card.addSubview(number)
         card.addSubview(title)
+        card.addSubview(dateLabel)
         
         card.snp.makeConstraints {
             $0.height.equalTo(57)
@@ -64,7 +70,11 @@ final class ListView : UIView {
         }
         title.snp.makeConstraints {
             $0.centerY.equalToSuperview()
-            $0.leading.equalTo(number.snp.trailing).offset(26)
+            $0.leading.equalTo(number.snp.trailing).offset(32)
+        }
+        dateLabel.snp.makeConstraints {
+            $0.trailing.equalToSuperview().inset(24)
+            $0.centerY.equalToSuperview()
         }
     }
     @objc private func cardTapped() {

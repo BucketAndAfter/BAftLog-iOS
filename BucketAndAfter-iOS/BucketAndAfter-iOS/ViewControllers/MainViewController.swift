@@ -75,7 +75,7 @@ class MainViewController: UIViewController {
             bucketInfo = try context.fetch(descriptor)
             
             for (i, data) in bucketInfo.enumerated(){
-                let listCard = ListView(numberI: i + 1, titleT: data.name, isDone: data.isDone)
+                let listCard = ListView(numberI: i + 1, titleT: data.name, isDone: data.isDone, date : data.date)
                 stackView.addArrangedSubview(listCard)
                 listCard.changeView = { [weak self] _ in
                     let moreVC = BucketMoreViewConteroller()
