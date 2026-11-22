@@ -36,8 +36,17 @@ final class WriteThoughtViewController : UIViewController {
         
         submitButton.buttonTapped = {
             let item = self.bucketInfo[self.i]
+            let wasDone = item.isDone
             item.isDone = true
             item.thoughts = self.thoughtTextField.textField.text
+            if !wasDone {
+                let now = Date()
+                let today = Calendar.current.dateComponents([.year, .month, .day], from: now)
+                if let year = today.year, let month = today.month, let day = today.day {
+                    item.date = String(format: "%4d.%2d.%2d", year, month, day)
+                    print(item.date)
+                }
+            }
             do {
                 try self.context.save()
                 self.navigationController?.popViewController(animated: true)
@@ -48,7 +57,6 @@ final class WriteThoughtViewController : UIViewController {
         }
     }
     private func setupLayout() {
-        
         view.addSubview(scrollView)
         
         [nameT, moreT, thoughtTextField, submitButton].forEach {

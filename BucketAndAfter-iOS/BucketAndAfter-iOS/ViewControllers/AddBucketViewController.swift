@@ -32,7 +32,7 @@ final class AddBucketViewController : UIViewController {
         submitButton.buttonTapped = {
             self.submit()
         }
-    }
+    }  
     private func setupLayout() {
         view.addSubview(navBar)
         view.addSubview(TitleTextField)
@@ -68,7 +68,7 @@ final class AddBucketViewController : UIViewController {
             moreTextField.textField.layer.borderWidth = 1
             errorLabel.isHidden = false
         } else {
-            let new = BucketInfo(isDone: false, name: TitleTextField.textField.text!, moreInfo: moreTextField.textField.text!, thoughts: "")
+            let new = BucketInfo(isDone: false, name: TitleTextField.textField.text!, moreInfo: moreTextField.textField.text!, thoughts: "", date: nil)
             context.insert(new)
             do {
                 try context.save()
