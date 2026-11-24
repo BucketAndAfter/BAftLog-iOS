@@ -37,16 +37,19 @@ final class ListView : UIView {
         number.text = "\(numberI)"
         numberInt = numberI
         dateLabel.text = date
+        dateLabel.isHidden = !isDone
         title.textColor = isDone ? UIColor(named: "gray600") : .black
         
         if isDone {
             let strikeA = NSMutableAttributedString(string: titleT)
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .left
+            strikeA.addAttribute(.paragraphStyle, value: paragraphStyle, range: NSRange(location: 0, length: strikeA.length))
             strikeA.addAttribute(.strikethroughStyle, value: NSUnderlineStyle.single.rawValue, range: NSMakeRange(0, strikeA.length))
             title.attributedText = strikeA
         } else {
             title.text = titleT
         }
-        
         setupLayout()
     }
     required init?(coder: NSCoder) {
@@ -71,6 +74,7 @@ final class ListView : UIView {
         title.snp.makeConstraints {
             $0.centerY.equalToSuperview()
             $0.leading.equalTo(number.snp.trailing).offset(32)
+            $0.trailing.lessThanOrEqualTo(dateLabel.snp.leading).offset(-4)
         }
         dateLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(24)
