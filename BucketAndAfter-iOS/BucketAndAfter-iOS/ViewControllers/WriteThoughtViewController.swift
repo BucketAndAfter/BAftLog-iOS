@@ -21,10 +21,12 @@ final class WriteThoughtViewController : UIViewController {
     let nameT = UILabel().then {
         $0.font = .systemFont(ofSize: 24, weight: .bold)
         $0.textColor = .black
+        $0.numberOfLines = 0
     }
     let moreT = UILabel().then {
         $0.font = .systemFont(ofSize: 16, weight: .regular)
         $0.textColor = .black
+        $0.numberOfLines = 0
     }
     let thoughtTextField = LongInputView(placeholderT: "여기에 달성 이후의 소감을 작성하세요")
     let submitButton : ButtonView = ButtonView(text: "확인")

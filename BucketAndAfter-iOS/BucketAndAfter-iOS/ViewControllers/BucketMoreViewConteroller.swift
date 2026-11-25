@@ -50,6 +50,10 @@ final class BucketMoreViewConteroller : UIViewController {
         $0.font = .systemFont(ofSize: 16, weight: .regular)
         $0.textColor = .black
     }
+    let dateT = UILabel().then {
+        $0.textColor = UIColor(named: "gray600")
+        $0.font = .systemFont(ofSize: 16)
+    }
     
     let writeButton:ButtonView = ButtonView(text: "소감 작성")
     let editButton:ButtonView = ButtonView(text: "수정")
@@ -71,9 +75,11 @@ final class BucketMoreViewConteroller : UIViewController {
         
         scrollView.addSubview(stackView)
         
-        [nameT, moreT, thoughtL, thoughtT, buttonStack].forEach {
-            stackView.addArrangedSubview($0)
-        }
+        setStack(top: nameT, bottom: moreT)
+        setStack(top: thoughtL, bottom: thoughtT)
+        stackView.addArrangedSubview(dateT)
+        stackView.addArrangedSubview(buttonStack)
+        
         [space, writeButton, editButton, deleteButton].forEach {
             buttonStack.addArrangedSubview($0)
         }
@@ -89,6 +95,16 @@ final class BucketMoreViewConteroller : UIViewController {
             $0.top.bottom.equalTo(scrollView.contentLayoutGuide)
             $0.leading.trailing.equalTo(scrollView.frameLayoutGuide).inset(16)
         }
+    }
+    private func setStack(top : UILabel, bottom : UILabel) {
+        let smallStack = UIStackView().then {
+            $0.spacing = 4
+            $0.axis = .vertical
+        }
+        [top, bottom].forEach {
+            smallStack.addArrangedSubview($0)
+        }
+        stackView.addArrangedSubview(smallStack)
     }
     private func setButtonAction() {
         writeButton.buttonTapped = {
@@ -127,7 +143,8 @@ final class BucketMoreViewConteroller : UIViewController {
             thoughtL.isHidden = !data.isDone
             thoughtT.isHidden = !data.isDone
             thoughtT.text = data.thoughts
-            
+            dateT.isHidden = !data.isDone
+            dateT.text = data.isDone ? "달성일 \(data.date)" : ""
         } catch {
             print("버킷 목록 불러오기 실패..ㅜㅜ: \(error)")
         }
