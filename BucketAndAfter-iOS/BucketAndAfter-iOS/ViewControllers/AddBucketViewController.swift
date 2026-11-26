@@ -15,7 +15,7 @@ final class AddBucketViewController : UIViewController {
     
     let navBar = NavigationBarView()
     
-    let TitleTextField : TitleInputView = TitleInputView()
+    let nameTextField : TitleInputView = TitleInputView()
     let moreTextField : LongInputView = LongInputView(placeholderT: "여기에 세부사항을 입력 해 주세요")
     let submitButton:ButtonView = ButtonView(text: "확인")
     let errorLabel = UILabel().then {
@@ -35,7 +35,7 @@ final class AddBucketViewController : UIViewController {
     }  
     private func setupLayout() {
         view.addSubview(navBar)
-        view.addSubview(TitleTextField)
+        view.addSubview(nameTextField)
         view.addSubview(moreTextField)
         view.addSubview(submitButton)
         view.addSubview(errorLabel)
@@ -43,13 +43,13 @@ final class AddBucketViewController : UIViewController {
         navBar.snp.makeConstraints {
             $0.top.leading.trailing.equalToSuperview()
         }
-        TitleTextField.snp.makeConstraints {
+        nameTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
             $0.top.equalTo(navBar.snp.bottom).offset(16)
         }
         moreTextField.snp.makeConstraints {
             $0.leading.trailing.equalToSuperview()
-            $0.top.equalTo(TitleTextField.snp.bottom).offset(24)
+            $0.top.equalTo(nameTextField.snp.bottom).offset(24)
         }
         submitButton.snp.makeConstraints {
             $0.trailing.equalToSuperview().inset(16)
@@ -61,14 +61,14 @@ final class AddBucketViewController : UIViewController {
         }
     }
     private func submit() {
-        if TitleTextField.textField.text!.isEmpty || moreTextField.textField.text.isEmpty {
-            TitleTextField.textField.layer.borderColor = UIColor.red.cgColor
-            TitleTextField.textField.layer.borderWidth = 1
+        if nameTextField.textField.text!.isEmpty || moreTextField.textField.text.isEmpty {
+            nameTextField.textField.layer.borderColor = UIColor.red.cgColor
+            nameTextField.textField.layer.borderWidth = 1
             moreTextField.textField.layer.borderColor = UIColor.red.cgColor
             moreTextField.textField.layer.borderWidth = 1
             errorLabel.isHidden = false
         } else {
-            let new = BucketInfo(isDone: false, name: TitleTextField.textField.text!, moreInfo: moreTextField.textField.text!, thoughts: "", date: nil)
+            let new = BucketInfo(isDone: false, name: nameTextField.textField.text!, moreInfo: moreTextField.textField.text!, thoughts: "", date: nil)
             context.insert(new)
             do {
                 try context.save()

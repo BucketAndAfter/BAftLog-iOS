@@ -13,7 +13,7 @@ import SwiftData
 final class BucketMoreViewConteroller : UIViewController {
     var bucketInfo : [BucketInfo] = []
     var context = Container.mainContext
-    var i : Int = 0
+    var i = 0
     
     let scrollView = UIScrollView()
     let stackView = UIStackView().then {
