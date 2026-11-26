@@ -13,7 +13,10 @@ final class ButtonView : UIView {
         $0.backgroundColor = UIColor(named: "main100")
         $0.tintColor = UIColor(named: "main800")
         $0.titleLabel?.font = .systemFont(ofSize: 16, weight: .medium)
-        $0.layer.cornerRadius = 24
+        $0.layer.cornerRadius = 5
+        var config = UIButton.Configuration.plain()
+        config.contentInsets = NSDirectionalEdgeInsets(top: 16, leading: 16, bottom: 16, trailing: 16)
+        $0.configuration = config
     }
     var buttonTapped : (()->())?
     init(text : String) {
@@ -26,8 +29,6 @@ final class ButtonView : UIView {
         self.addSubview(button)
         
         button.snp.makeConstraints {
-            $0.height.equalTo(48)
-            $0.width.equalTo(90)
             $0.edges.equalToSuperview()
         }
     }
