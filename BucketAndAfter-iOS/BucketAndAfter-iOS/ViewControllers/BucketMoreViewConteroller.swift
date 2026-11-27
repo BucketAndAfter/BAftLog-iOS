@@ -22,9 +22,9 @@ final class BucketMoreViewConteroller : UIViewController {
     }
     let buttonStack = UIStackView().then {
         $0.axis = .horizontal
-        $0.spacing = 8
+        $0.spacing = 16
         $0.alignment = .fill
-        $0.distribution = .equalSpacing
+        $0.distribution = .fill
         $0.semanticContentAttribute = .forceLeftToRight
     }
     

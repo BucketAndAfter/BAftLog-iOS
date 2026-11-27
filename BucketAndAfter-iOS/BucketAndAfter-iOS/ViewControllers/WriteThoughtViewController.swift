@@ -18,6 +18,8 @@ final class WriteThoughtViewController : UIViewController {
     let scrollView = UIScrollView()
     let navBar = NavigationBarView()
     
+    let addPhotoButton : Photos = Photos()
+    
     let nameT = UILabel().then {
         $0.font = .systemFont(ofSize: 24, weight: .bold)
         $0.textColor = .black
@@ -61,7 +63,7 @@ final class WriteThoughtViewController : UIViewController {
     private func setupLayout() {
         view.addSubview(scrollView)
         
-        [nameT, moreT, thoughtTextField, submitButton].forEach {
+        [nameT, moreT, thoughtTextField, addPhotoButton, submitButton].forEach {
             scrollView.addSubview($0)
         }
         
@@ -84,6 +86,12 @@ final class WriteThoughtViewController : UIViewController {
         submitButton.snp.makeConstraints {
             $0.top.equalTo(thoughtTextField.snp.bottom).offset(16)
             $0.trailing.equalTo(scrollView.frameLayoutGuide).inset(16)
+        }
+        addPhotoButton.snp.makeConstraints {
+            $0.centerY.equalTo(submitButton)
+            $0.trailing.equalTo(submitButton.snp.leading).offset(-16)
+            $0.width.equalTo(60)
+            $0.height.equalTo(48)
         }
     }
     func setupTexts(i : Int) {
